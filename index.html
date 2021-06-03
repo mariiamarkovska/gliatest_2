@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+	background-color: #06b48b;
+	}
+h1 {
+	color: white;
+	font-family: Optima, sans-serif;
+	font-weight: 300;
+	font-size: 40px;
+	text-align: center;
+	}
+p {
+	color: #ffd8b1;
+	font-size: 30px;
+	font-family: Optima, sans-serif;
+	font-weight: 200;
+	text-align: center;
+	}
+</style>
+	<title></title>
+<script src="https://api.beta.salemove.com/salemove_integration.js"></script>
+</head>
+<body>
+
+<h1>Reinvent</h1>
+<p>How You Serve Your Customers</p>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="81800407505-e0b1hcolvgfd5fk81bmv627selqbobin.apps.googleusercontent.com">
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<script function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+	}></script>
+
+<script sm.getApi({version: 'v1'}).then(function(api) {
+  const customCard = message => {
+    const k = 'test';
+  };
+
+  const createCustomCard = function(metadata) {
+    const element = document.createElement('div');
+    element.innerHTML = customCard(metadata);
+
+    return element.outerHTML;
+  };
+});
+
+  api.visitorApp.setChatMessageRenderer(function(message) {
+    if (!message.metadata) {
+      return false;
+    }
+
+    const customCard = document.createElement('div');
+    customCard.innerHTML = createCustomCard(message.metadata);
+
+    return customCard;
+  });></script>
+</body>
+</html>
